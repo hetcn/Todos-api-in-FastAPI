@@ -6,8 +6,8 @@ from starlette.types import ASGIApp
 host_server = os.environ.get('host_server', 'localhost')
 db_server_port = urllib.parse.quote_plus(str(os.environ.get('db_server_port', '5432')))
 database_name = os.environ.get('database_name', 'postgres')
-db_username = urllib.parse.quote_plus(str(os.environ.get('db_username', 'postgres')))
-db_password = urllib.parse.quote_plus(str(os.environ.get('db_password', 'Vrin@123')))
+db_username = urllib.parse.quote_plus(str(os.environ.get('db_username', 'provide username here')))
+db_password = urllib.parse.quote_plus(str(os.environ.get('db_password', 'provide password here')))
 ssl_mode = urllib.parse.quote_plus(str(os.environ.get('ssl_mode','prefer')))
 DATABASE_URL = 'postgresql://{}:{}@{}:{}/{}?sslmode={}'.format(db_username, db_password, host_server, db_server_port, database_name, ssl_mode)
 
@@ -95,72 +95,3 @@ async def delete_todes(todo_id:int):
     await database.execute(query)
     return {"message":"Todo with id: {} deleted successfully".format(todo_id)}
 
-# databases = databases
-
-
-
-
-# from typing import Optional
-
-# from fastapi import FastAPI
-# from pydantic import BaseModel
-# from typing import List
-# # from sqlalchemy import engine, sql
-# # from sqlalchemy.sql.expression import true
-
-# import databases,sqlalchemy
-# ##Postgres Databases
-
-# DATABASE_URL= ""
-# database = databases.Database(DATABASE_URL)
-# metadata = sqlalchemy.MetaData()
-
-# todos_items = sqlalchemy.Table(
-#     'todos',
-#     metadata,
-#     sqlalchemy.Column('id',sqlalchemy.Integer,primary_key=True),
-#     sqlalchemy.Column('Title',sqlalchemy.String),
-#     sqlalchemy.Column('Description',sqlalchemy.String),
-# )
-
-# engine = sqlalchemy.create_engine(
-#     DATABASE_URL
-# )
-# metadata.create_all(engine)
-
-# ## Models
-
-# class Todos(BaseModel):
-#     id : int
-#     title : str
-#     description : str
-
-# app = FastAPI()
-
-# @app.get('/todos',response_model=List(Todos))
-# async def show_all_todos():
-#     queary = users.select()
-#     return await database.fetch_all(queary)
-
-
-
-# # app = FastAPI()
-
-# # fakedb = []
-
-# # class todos(BaseModel):
-# #     id:int
-# #     title : str
-# #     description : str
-
-# # @app.get("/")
-# # def read_root():
-# #     return {"Hello": "World"}
-
-# # @app.get("/todos")
-# # def get_todos():
-# #     return fakedb
-
-# # @app.get("/todo/{todo_id}")
-# # def get_todo(todo_id:int):
-# #     todo
